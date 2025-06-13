@@ -3,9 +3,10 @@ import axios from 'axios'
 
 function App() {
   const [msg, setMsg] = useState('')
+  const baseURL = import.meta.env.VITE_API_URL
 
   useEffect(() => {
-    axios.get('/api/hello')
+    axios.get(`${baseURL}/api/hello`)
       .then(res => setMsg(res.data.message))
       .catch(err => console.error(err))
   }, [])
