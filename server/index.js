@@ -5,11 +5,10 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for Vercel frontend
+// ✅ Allow both local dev and Vercel frontend
 app.use(cors({
-  origin: 'https://your-frontend-name.vercel.app'
+  origin: ['http://localhost:5173', 'https://your-frontend.vercel.app']
 }));
-
 app.use(express.json());
 
 app.get('/api/hello', (req, res) => {
@@ -17,5 +16,5 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
