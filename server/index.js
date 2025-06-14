@@ -5,7 +5,7 @@ const app = express();
 
 // ✅ Allow your frontend Vercel domain
 app.use(cors({
-  origin: "https://test-avfw.vercel.app",  // your frontend Vercel URL
+    origin: ["https://test-avfw.vercel.app", "http://localhost:5173"],    // your frontend Vercel URL
   methods: ["GET", "POST", "PUT", "DELETE"], // as needed
   credentials: true
 }));
