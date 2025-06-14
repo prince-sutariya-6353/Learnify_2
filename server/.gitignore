@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: Ignore Vercel output if deploying via CLI
+.vercel/
+
+# Coverage reports
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Build output (if applicable)
+dist/
+build/
