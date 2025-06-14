@@ -1,20 +1,30 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// ✅ Allow both local dev and Vercel frontend
+// ✅ Allow your frontend Vercel domain
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-frontend.vercel.app']
+  origin: "https://test-avfw.vercel.app",  // your frontend Vercel URL
+  methods: ["GET", "POST", "PUT", "DELETE"], // as needed
+  credentials: true
 }));
+
+// Parse incoming JSON
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from Express on Vercel!' });
+// Sample route
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from the backend!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Deploy on Vercel: this export is needed
+module.exports = app;
+
+// For local testing only:
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
+}
