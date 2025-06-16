@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 // ✅ Signup Route
-app.post("/api/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
