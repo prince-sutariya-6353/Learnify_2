@@ -49,9 +49,9 @@ function Login() {
           Login
         </button>
       </form>
-      {message && <p className="mt-4 text-red-500">{message}</p>}
+      {message && <p className="mt-4 text-green-700">{message}</p>}
     </div>
   );
-}
+}s
 
 export default Login;

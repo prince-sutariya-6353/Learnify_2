@@ -13,7 +13,7 @@ function App() {
       ? "http://localhost:3000/api/hello"
       : "https://test-lyart-gamma-43.vercel.app/api/hello";
 
-  useEffect(() => {
+  useEffect(() => { 
     axios
       .get(backendURL)
       .then((res) => setMessage(res.data.message))
