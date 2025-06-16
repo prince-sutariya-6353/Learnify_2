@@ -1,31 +1,21 @@
-// src/pages/Signup.jsx
 import React, { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
+const backend =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:3000"
+    : "https://test-lyart-gamma-43.vercel.app";
+
+function Signup() {
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [message, setMessage] = useState("");
 
-  const backendURL = import.meta.env.MODE === "development"
-    ? "http://localhost:3000"
-    : "https://test-lyart-gamma-43.vercel.app/api/hello"; // ✅ Replace with real deployed backend URL
-
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(""); // Clear previous message
     try {
-      const res = await axios.post(`${backendURL}/api/signup`, formData);
+      const res = await axios.post(`${backend}/api/signup`, form);
       setMessage(res.data.message);
     } catch (err) {
       setMessage(err.response?.data?.message || "Signup failed");
@@ -33,42 +23,17 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow">
-      <h2 className="text-xl font-bold mb-4">Sign Up</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <button type="submit" className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-          Register
-        </button>
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl mb-4 font-bold">Signup</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input name="username" placeholder="Username" onChange={handleChange} className="border p-2 w-full" />
+        <input name="email" type="email" placeholder="Email" onChange={handleChange} className="border p-2 w-full" />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} className="border p-2 w-full" />
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2">Signup</button>
       </form>
-      {message && <p className="mt-4 text-center text-green-600">{message}</p>}
+      {message && <p className="mt-4 text-red-500">{message}</p>}
     </div>
   );
-};
+}
 
 export default Signup;
