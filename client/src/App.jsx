@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login";           // ✅ Add Login page
 import Header from "./components/Header";
 
 function App() {
@@ -16,15 +17,24 @@ function App() {
     axios
       .get(backendURL)
       .then((res) => setMessage(res.data.message))
-      .catch(() => setMessage("Failed to connect to backend"));
+      .catch(() => setMessage("❌ Failed to connect to backend"));
   }, [backendURL]);
 
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<h1 className="text-center mt-10 text-3xl">Welcome to Learnify<br/>{message}</h1>} />
+        <Route
+          path="/"
+          element={
+            <div className="text-center mt-10">
+              <h1 className="text-3xl font-bold">Welcome to Learnify</h1>
+              <p className="mt-4 text-lg text-gray-600">{message}</p>
+            </div>
+          }
+        />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} /> {/* ✅ Add Login route */}
       </Routes>
     </Router>
   );
