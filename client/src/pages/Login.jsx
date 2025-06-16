@@ -26,55 +26,69 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
-      <div className="bg-gray-900/80 backdrop-blur-md p-10 rounded-xl shadow-2xl max-w-sm w-full border border-gray-700">
-        <h2 className="text-3xl font-extrabold text-center text-white mb-8 tracking-tight">
-          Sign In
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full transform transition-all hover:shadow-xl">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Welcome Back
         </h2>
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <input
               id="email"
               name="email"
               type="email"
-              placeholder="Email address"
+              placeholder="Enter your email"
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ease-in-out hover:bg-gray-700"
+              className="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
               required
             />
           </div>
           <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <input
               id="password"
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Enter your password"
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ease-in-out hover:bg-gray-700"
+              className="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="w-full bg-green-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-300 ease-in-out"
           >
             Sign In
           </button>
         </form>
         {message && (
           <p
-            className={`mt-5 text-center text-sm font-medium ${
-              message.includes("failed") ? "text-red-400" : "text-blue-400"
-            } animate-fade-in`}
+            className={`mt-4 text-center text-sm ${
+              message.includes("failed")
+                ? "text-red-600"
+                : "text-green-600"
+            }`}
           >
             {message}
           </p>
         )}
-        <p className="mt-6 text-center text-sm text-gray-400">
-          Need an account?{" "}
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?{" "}
           <a
             href="/signup"
-            className="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
+            className="text-green-600 hover:text-green-800 font-medium"
           >
             Sign up
           </a>
