@@ -17,6 +17,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setMessage(""); // Clear previous message
     try {
       const res = await axios.post(`${backendURL}/api/login`, form);
       setMessage(res.data.message);
@@ -30,57 +31,59 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900">
-      <div className="relative bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl max-w-md w-full border border-white/20">
-        {/* Subtle glowing orb effect in background */}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 to-indigo-900">
+      <div className="relative bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl max-w-md w-full border border-white/20">
+        {/* Subtle background effect */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute -top-16 -left-16 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-indigo-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
         <h2 className="text-4xl font-extrabold text-center text-white mb-8 tracking-wide animate-fade-in">
-          Sign In
+          Login
         </h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="relative">
+          <div className="relative group">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-white mb-2 transition-all duration-300 group-focus-within:text-purple-300"
+            >
+              Email
+            </label>
             <input
               id="email"
               name="email"
               type="email"
               placeholder="Email address"
               onChange={handleChange}
-              className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 ease-in-out hover:bg-white/10 peer"
+              className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 ease-in-out shadow-inner hover:shadow-lg hover:bg-white/30"
               required
             />
-            <label
-              htmlFor="email"
-              className="absolute left-5 -top-2.5 text-sm text-gray-400 bg-transparent px-1 transition-all duration-300 peer-focus:text-blue-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"
-            >
-              Email
-            </label>
+            <div className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
-          <div className="relative">
+          <div className="relative group">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-white mb-2 transition-all duration-300 group-focus-within:text-purple-300"
+            >
+              Password
+            </label>
             <input
               id="password"
               name="password"
               type="password"
               placeholder="Password"
               onChange={handleChange}
-              className="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 ease-in-out hover:bg-white/10 peer"
+              className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 ease-in-out shadow-inner hover:shadow-lg hover:bg-white/30"
               required
             />
-            <label
-              htmlFor="password"
-              className="absolute left-5 -top-2.5 text-sm text-gray-400 bg-transparent px-1 transition-all duration-300 peer-focus:text-blue-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"
-            >
-              Password
-            </label>
+            <div className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300 ease-in-out transform hover:scale-105 ${
+            className={`w-full py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-purple-800 transition-all duration-300 ease-in-out transform hover:scale-105 ${
               isLoading ? "opacity-70 cursor-not-allowed" : ""
-            }`}
+            } shadow-md hover:shadow-xl`}
           >
             {isLoading ? (
               <span className="flex items-center justify-center">
@@ -112,24 +115,53 @@ function Login() {
           </button>
         </form>
         {message && (
-          <p
-            className={`mt-5 text-center text-sm font-medium ${
-              message.includes("failed") ? "text-red-400" : "text-blue-300"
-            } animate-fade-in`}
+          <div
+            className={`mt-6 p-4 rounded-lg text-center text-sm font-medium ${
+              message.includes("failed")
+                ? "bg-red-500/20 text-red-100 border border-red-500/40 shadow-lg"
+                : "bg-green-500/20 text-green-100 border border-green-500/40 shadow-lg"
+            } animate-slide-in`}
           >
             {message}
-          </p>
+          </div>
         )}
-        <p className="mt-6 text-center text-sm text-gray-300">
+        <p className="mt-6 text-center text-sm text-gray-200">
           Don't have an account?{" "}
           <a
             href="/signup"
-            className="text-blue-300 hover:text-blue-200 font-medium transition-colors duration-200 hover:underline"
+            className="text-purple-300 hover:text-purple-200 font-medium transition-colors duration-200 hover:underline"
           >
             Sign up
           </a>
         </p>
       </div>
+
+      {/* Custom Tailwind CSS for animations */}
+      <style>{`
+        @keyframes slide-in {
+          0% {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-slide-in {
+          animation: slide-in 0.4s ease-out forwards;
+        }
+        @keyframes fade-in {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out forwards;
+        }
+        .shadow-inner {
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+      `}</style>
     </div>
   );
 }
