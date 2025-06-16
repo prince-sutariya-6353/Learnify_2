@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Login from "./pages/Login";    // ✅ must match exact casing
+import Signup from "./pages/Signup";  // ✅ same here
 import Header from "./components/Header";
 
 function App() {
